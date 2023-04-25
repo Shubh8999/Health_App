@@ -2,12 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from gensim.models import Word2Vec
-import re
-import string
-import nltk
 from datetime import datetime
 import sqlite3
-import hashlib
 
 # Connect to the database
 conn = sqlite3.connect('../Data/1_mental_health_chatbot.db')
@@ -57,11 +53,27 @@ def login():
     st.markdown("""
 
     <style>
+    .css-1uii870.e16nr0p34{
+        padding: 6px;
+    }
 
+    .css-1uii870.e16nr0p34 p{
+        font-size: 18px;
+        font-weight: bold;
+    }
 
+    .css-9gn890.e16nr0p34 p
+    {
+        font-weight: bold;
+
+    }
+    .css-10trblm.e16nr0p30
+    {
+        text-align: center;
+    }
     .css-1e1k72n.e1fqkh3o1 {
             display: none;
-        }
+    }
 
     </style>
 
@@ -99,7 +111,7 @@ def login():
                 st.experimental_set_query_params(page="app", user=user[0])
                 st.experimental_rerun()
             else:
-                st.write("Incorrect username or password. Please try again.")
+                st.error("Incorrect username or password. Please try again.")
     elif form_type == "Sign up":
         st.write("Welcome! Please fill out the form below to create a new account.")
     # Show the sign-up form
@@ -107,7 +119,7 @@ def login():
         new_password = st.text_input("Password:", type="password")
         confirm_password = st.text_input("Confirm password:", type="password")
         if new_password != confirm_password:
-            st.write("Passwords do not match. Please try again.")
+            st.error("Passwords do not match. Please try again.")
         else:
             # Show the sign-up button
             if st.button("Sign up"):
@@ -115,14 +127,14 @@ def login():
                 c.execute("SELECT * FROM users WHERE username=?",
                           (new_username,))
                 if c.fetchone() is not None:
-                    st.write(
+                    st.error(
                         "Username already exists. Please choose a different username.")
                 else:
                     # Add the new user to the database
                     c.execute(
                         "INSERT INTO users (username, password) VALUES (?, ?)", (new_username, new_password))
                     conn.commit()
-                    st.write(
+                    st.success(
                         "Account created successfully. Please log in to continue.")
 
 
@@ -139,12 +151,12 @@ def app():
         """
 
     )
-
-    link1 = '<a href="/app?user_id={}#my_anchor" target="_self" style="font-size: 24px; color: blue; text-decoration: none;">Chatbot</a>'.format(user_id)
+    
+    link1 = '<a href="/Chatbot?user_id={}#my_anchor" target="_self" style="font-size: 24px; color: blue; text-decoration: none;font-weight:bold;">Chatbot</a>'.format(user_id)
     st.markdown(link1, unsafe_allow_html=True)
-    link2 = '<a href="/Custom_food#my_anchor" target="_self" style="font-size: 24px; color: blue; text-decoration: none;">Custom Food Recommendation</a>'
+    link2 = '<a href="/Custom_food#my_anchor" target="_self" style="font-size: 24px; color: blue; text-decoration: none;font-weight:bold;">Custom Food Recommendation</a>'
     st.markdown(link2, unsafe_allow_html=True)
-    link3 = '<a href="/Diet_Recommendation#my_anchor" target="_self" style="font-size: 24px; color: blue; text-decoration: none;">Diet Recommendation</a>'
+    link3 = '<a href="/Diet_Recommendation#my_anchor" target="_self" style="font-size: 24px; color: blue; text-decoration: none;font-weight:bold;">Diet Recommendation</a>'
     st.markdown(link3, unsafe_allow_html=True)
 
 

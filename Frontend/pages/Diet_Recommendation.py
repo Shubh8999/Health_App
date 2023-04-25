@@ -9,16 +9,15 @@ st.set_page_config(page_title="Diet Recommendation",
                    page_icon="💪", layout="wide")
 st.session_state.authenticated = True
 st.markdown("""
-
     <style>
     ul > li:first-child {
-  display: none;
-}
+        display: none;
+    }
 
     </style>
-
     """, unsafe_allow_html=True)
-logout_link = '<a href="/#my_anchor" target="_self" style="font-size: 18px; color:black;padding:10px;border:1px solid white;text-decoration:none;background-color:white;border-radius:5px;border:none;box-shadow:1px 1px 6px red;position: absolute; top: 10px; right: 10px;">Logout</a>'
+
+logout_link = '<a href="/#my_anchor" target="_self" style="font-size: 18px; color:black;padding:10px;border:1px solid white;text-decoration:none;background-color:white;border-radius:5px;border:none;box-shadow:1px 1px 6px red;position: absolute; top: -50px; right: -10px;">Logout</a>'
 st.markdown(logout_link, unsafe_allow_html=True)
 nutritions_values = ['Calories', 'FatContent', 'SaturatedFatContent', 'CholesterolContent',
                      'SodiumContent', 'CarbohydrateContent', 'FiberContent', 'SugarContent', 'ProteinContent']
@@ -172,98 +171,121 @@ class Display:
                                 - Total Time      : {recipe['TotalTime']}min
                             """)
 
-    def display_meal_choices(self,person,recommendations):    
+    def display_meal_choices(self, person, recommendations):
         st.subheader('Choose your meal composition:')
         # Display meal compositions choices
-        if len(recommendations)==3:
-            breakfast_column,launch_column,dinner_column=st.columns(3)
+        if len(recommendations) == 3:
+            breakfast_column, launch_column, dinner_column = st.columns(3)
             with breakfast_column:
-                breakfast_choice=st.selectbox(f'Choose your breakfast:',[recipe['Name'] for recipe in recommendations[0]])
+                breakfast_choice = st.selectbox(f'Choose your breakfast:', [
+                                                recipe['Name'] for recipe in recommendations[0]])
             with launch_column:
-                launch_choice=st.selectbox(f'Choose your lunch:',[recipe['Name'] for recipe in recommendations[1]])
+                launch_choice = st.selectbox(f'Choose your lunch:', [
+                                             recipe['Name'] for recipe in recommendations[1]])
             with dinner_column:
-                dinner_choice=st.selectbox(f'Choose your dinner:',[recipe['Name'] for recipe in recommendations[2]])  
-            choices=[breakfast_choice,launch_choice,dinner_choice]     
-        elif len(recommendations)==4:
-            breakfast_column,morning_snack,launch_column,dinner_column=st.columns(4)
+                dinner_choice = st.selectbox(f'Choose your dinner:', [
+                                             recipe['Name'] for recipe in recommendations[2]])
+            choices = [breakfast_choice, launch_choice, dinner_choice]
+        elif len(recommendations) == 4:
+            breakfast_column, morning_snack, launch_column, dinner_column = st.columns(
+                4)
             with breakfast_column:
-                breakfast_choice=st.selectbox(f'Choose your breakfast:',[recipe['Name'] for recipe in recommendations[0]])
+                breakfast_choice = st.selectbox(f'Choose your breakfast:', [
+                                                recipe['Name'] for recipe in recommendations[0]])
             with morning_snack:
-                morning_snack=st.selectbox(f'Choose your morning_snack:',[recipe['Name'] for recipe in recommendations[1]])
+                morning_snack = st.selectbox(f'Choose your morning_snack:', [
+                                             recipe['Name'] for recipe in recommendations[1]])
             with launch_column:
-                launch_choice=st.selectbox(f'Choose your lunch:',[recipe['Name'] for recipe in recommendations[2]])
+                launch_choice = st.selectbox(f'Choose your lunch:', [
+                                             recipe['Name'] for recipe in recommendations[2]])
             with dinner_column:
-                dinner_choice=st.selectbox(f'Choose your dinner:',[recipe['Name'] for recipe in recommendations[3]])
-            choices=[breakfast_choice,morning_snack,launch_choice,dinner_choice]                
+                dinner_choice = st.selectbox(f'Choose your dinner:', [
+                                             recipe['Name'] for recipe in recommendations[3]])
+            choices = [breakfast_choice, morning_snack,
+                       launch_choice, dinner_choice]
         else:
-            breakfast_column,morning_snack,launch_column,afternoon_snack,dinner_column=st.columns(5)
+            breakfast_column, morning_snack, launch_column, afternoon_snack, dinner_column = st.columns(
+                5)
             with breakfast_column:
-                breakfast_choice=st.selectbox(f'Choose your breakfast:',[recipe['Name'] for recipe in recommendations[0]])
+                breakfast_choice = st.selectbox(f'Choose your breakfast:', [
+                                                recipe['Name'] for recipe in recommendations[0]])
             with morning_snack:
-                morning_snack=st.selectbox(f'Choose your morning_snack:',[recipe['Name'] for recipe in recommendations[1]])
+                morning_snack = st.selectbox(f'Choose your morning_snack:', [
+                                             recipe['Name'] for recipe in recommendations[1]])
             with launch_column:
-                launch_choice=st.selectbox(f'Choose your lunch:',[recipe['Name'] for recipe in recommendations[2]])
+                launch_choice = st.selectbox(f'Choose your lunch:', [
+                                             recipe['Name'] for recipe in recommendations[2]])
             with afternoon_snack:
-                afternoon_snack=st.selectbox(f'Choose your afternoon:',[recipe['Name'] for recipe in recommendations[3]])
+                afternoon_snack = st.selectbox(f'Choose your afternoon:', [
+                                               recipe['Name'] for recipe in recommendations[3]])
             with dinner_column:
-                dinner_choice=st.selectbox(f'Choose your  dinner:',[recipe['Name'] for recipe in recommendations[4]])
-            choices=[breakfast_choice,morning_snack,launch_choice,afternoon_snack,dinner_choice] 
-        
+                dinner_choice = st.selectbox(f'Choose your  dinner:', [
+                                             recipe['Name'] for recipe in recommendations[4]])
+            choices = [breakfast_choice, morning_snack,
+                       launch_choice, afternoon_snack, dinner_choice]
+
         # Calculating the sum of nutritional values of the choosen recipes
-        total_nutrition_values={nutrition_value:0 for nutrition_value in nutritions_values}
-        for choice,meals_ in zip(choices,recommendations):
+        total_nutrition_values = {
+            nutrition_value: 0 for nutrition_value in nutritions_values}
+        for choice, meals_ in zip(choices, recommendations):
             for meal in meals_:
-                if meal['Name']==choice:
+                if meal['Name'] == choice:
                     for nutrition_value in nutritions_values:
-                        total_nutrition_values[nutrition_value]+=meal[nutrition_value]
-  
-        total_calories_chose=total_nutrition_values['Calories']
-        loss_calories_chose=round(person.calories_calculator()*person.weight_loss)
+                        total_nutrition_values[nutrition_value] += meal[nutrition_value]
+
+        total_calories_chose = total_nutrition_values['Calories']
+        loss_calories_chose = round(
+            person.calories_calculator()*person.weight_loss)
 
         # Display corresponding graphs
-        st.markdown(f'<h5 style="text-align: center;font-family:sans-serif;">Total Calories in Recipes vs {st.session_state.weight_loss_option} Calories:</h5>', unsafe_allow_html=True)
+        st.markdown(
+            f'<h5 style="text-align: center;font-family:sans-serif;">Total Calories in Recipes vs {st.session_state.weight_loss_option} Calories:</h5>', unsafe_allow_html=True)
         total_calories_graph_options = {
-    "xAxis": {
-        "type": "category",
-        "data": ['Total Calories you chose', f"{st.session_state.weight_loss_option} Calories"],
-    },
-    "yAxis": {"type": "value"},
-    "series": [
-        {
-            "data": [
-                {"value":total_calories_chose, "itemStyle": {"color":["#33FF8D","#FF3333"][total_calories_chose>loss_calories_chose]}},
-                {"value": loss_calories_chose, "itemStyle": {"color": "#3339FF"}},
+            "xAxis": {
+                "type": "category",
+                "data": ['Total Calories you chose', f"{st.session_state.weight_loss_option} Calories"],
+            },
+            "yAxis": {"type": "value"},
+            "series": [
+                {
+                    "data": [
+                        {"value": total_calories_chose, "itemStyle": {
+                            "color": ["#33FF8D", "#FF3333"][total_calories_chose > loss_calories_chose]}},
+                        {"value": loss_calories_chose,
+                            "itemStyle": {"color": "#3339FF"}},
+                    ],
+                    "type": "bar",
+                }
             ],
-            "type": "bar",
         }
-    ],
-}
-        st_echarts(options=total_calories_graph_options,height="400px",)
-        st.markdown(f'<h5 style="text-align: center;font-family:sans-serif;">Nutritional Values:</h5>', unsafe_allow_html=True)
+        st_echarts(options=total_calories_graph_options, height="400px",)
+        st.markdown(
+            f'<h5 style="text-align: center;font-family:sans-serif;">Nutritional Values:</h5>', unsafe_allow_html=True)
         nutritions_graph_options = {
-    "tooltip": {"trigger": "item"},
-    "legend": {"top": "5%", "left": "center"},
-    "series": [
-        {
-            "name": "Nutritional Values",
-            "type": "pie",
-            "radius": ["40%", "70%"],
-            "avoidLabelOverlap": False,
-            "itemStyle": {
-                "borderRadius": 10,
-                "borderColor": "#fff",
-                "borderWidth": 2,
-            },
-            "label": {"show": False, "position": "center"},
-            "emphasis": {
-                "label": {"show": True, "fontSize": "40", "fontWeight": "bold"}
-            },
-            "labelLine": {"show": False},
-            "data": [{"value":round(total_nutrition_values[total_nutrition_value]),"name":total_nutrition_value} for total_nutrition_value in total_nutrition_values],
+            "tooltip": {"trigger": "item"},
+            "legend": {"top": "5%", "left": "center"},
+            "series": [
+                {
+                    "name": "Nutritional Values",
+                    "type": "pie",
+                    "radius": ["40%", "70%"],
+                    "avoidLabelOverlap": False,
+                    "itemStyle": {
+                        "borderRadius": 10,
+                        "borderColor": "#fff",
+                        "borderWidth": 2,
+                    },
+                    "label": {"show": False, "position": "center"},
+                    "emphasis": {
+                        "label": {"show": True, "fontSize": "40", "fontWeight": "bold"}
+                    },
+                    "labelLine": {"show": False},
+                    "data": [{"value": round(total_nutrition_values[total_nutrition_value]), "name":total_nutrition_value} for total_nutrition_value in total_nutrition_values],
+                }
+            ],
         }
-    ],
-}       
         st_echarts(options=nutritions_graph_options, height="500px",)
+
 
 display = Display()
 title = "<h1 style='text-align: center;'>Diet Recommendation</h1>"
@@ -310,4 +332,5 @@ if st.session_state.generated:
             st.session_state.person, st.session_state.recommendations)
         st.success('Recommendation Generated Successfully !', icon="✅")
     with st.container():
-        display.display_meal_choices(st.session_state.person,st.session_state.recommendations)
+        display.display_meal_choices(
+            st.session_state.person, st.session_state.recommendations)

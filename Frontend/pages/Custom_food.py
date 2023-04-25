@@ -15,7 +15,7 @@ st.markdown("""
     </style>
 
     """, unsafe_allow_html=True)
-logout_link = '<a href="/#my_anchor" target="_self" style="font-size: 18px; color:black;padding:10px;border:1px solid white;text-decoration:none;background-color:white;border-radius:5px;border:none;box-shadow:1px 1px 6px red;position: absolute; top: 10px; right: 10px;">Logout</a>'
+logout_link = '<a href="/#my_anchor" target="_self" style="font-size: 18px; color:black;padding:10px;border:1px solid white;text-decoration:none;background-color:white;border-radius:5px;border:none;box-shadow:1px 1px 6px red;position: absolute; top: -50px; right: -10px;">Logout</a>'
 st.markdown(logout_link, unsafe_allow_html=True)
 
 st.session_state.authenticated = True

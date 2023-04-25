@@ -30,7 +30,7 @@ st.markdown("""
 
     """, unsafe_allow_html=True)
 
-logout_link = '<a href="/#my_anchor" target="_self" style="font-size: 18px; color:black;padding:10px;border:1px solid white;text-decoration:none;background-color:white;border-radius:5px;border:none;box-shadow:1px 1px 6px red;position: absolute; top: 10px; right: 10px;">Logout</a>'
+logout_link = '<a href="/#my_anchor" target="_self" style="font-size: 18px; color:black;padding:10px;border:1px solid white;text-decoration:none;background-color:white;border-radius:5px;border:none;box-shadow:1px 1px 6px red;position: absolute; top: -50px; right: -10px;">Logout</a>'
 st.markdown(logout_link, unsafe_allow_html=True)
 
 # Load the mental health chatbot dataset
@@ -109,7 +109,7 @@ def generate_response(input_text):
 # Define the app function
 
 
-def app():
+def chatbot():
     # st.set_page_config(page_title="Mental Health Chatbot", page_icon=":guardsman:", layout="wide")
     # st.write("# Mental Health Chatbot")
     # st.write("Welcome! I'm here to help you with your mental health concerns. Just type in your question or concern and I'll do my best to provide you with an appropriate response.")
@@ -232,4 +232,4 @@ def insert_conversation_history(user_id, user_input, bot_response):
 
 # Run the app
 if __name__ == "__main__":
-    app()
+    chatbot()
