@@ -3,6 +3,14 @@
     The recommendations are custom user based according to users needs and 
     The Chatbot uses the word2vec model for geneartion of accurate responses 
 
-To start backend run the command uvicorn main:app --reload in Backend folder.
+### How to Run
 
-To start frontend run the command streamlit run .\Home.py in Frontend folder.
+1. To start backend run the command below in Backend folder:
+
+   ```bash
+   uvicorn main:app --reload
+
+2. To start frontend run the command below in Frontend folder:
+
+   ```bash
+   streamlit run .\Home.py
