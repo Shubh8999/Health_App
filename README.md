@@ -13,4 +13,4 @@
 2. To start frontend run the command below in Frontend folder:
 
    ```bash
-   streamlit run .\Home.py
+   streamlit run .\Hello.py
