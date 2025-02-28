@@ -14,3 +14,16 @@
 
    ```bash
    streamlit run .\Hello.py
+
+ 
+### **Diet Recommendation System**
+<img src="https://raw.githubusercontent.com/Shubh8999/Health_App/master/Diet.png" width="600" />
+<img src="https://raw.githubusercontent.com/Shubh8999/Health_App/master/Diet2.png" width="600" />
+
+### **Custom Food Suggestions**
+<img src="https://raw.githubusercontent.com/Shubh8999/Health_App/master/CustomFood.png" width="600" />
+<img src="https://raw.githubusercontent.com/Shubh8999/Health_App/master/CustomFood2.png" width="600" />
+
+### **Mental Health Chatbot**
+<img src="https://raw.githubusercontent.com/Shubh8999/Health_App/master/Chatbot.png" width="600" />
+<img src="https://raw.githubusercontent.com/Shubh8999/Health_App/master/Chatbot2.png" width="600" />
