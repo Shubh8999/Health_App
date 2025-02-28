@@ -16,11 +16,11 @@
    streamlit run .\Hello.py
 
  
-### **Diet Recommendation System**
+### **Diet Recommendation **
 <img src="https://raw.githubusercontent.com/Shubh8999/Health_App/master/Diet.png" width="600" />
 <img src="https://raw.githubusercontent.com/Shubh8999/Health_App/master/Diet2.png" width="600" />
 
-### **Custom Food Suggestions**
+### **Custom Food Recommendation**
 <img src="https://raw.githubusercontent.com/Shubh8999/Health_App/master/CustomFood.png" width="600" />
 <img src="https://raw.githubusercontent.com/Shubh8999/Health_App/master/CustomFood2.png" width="600" />
 
